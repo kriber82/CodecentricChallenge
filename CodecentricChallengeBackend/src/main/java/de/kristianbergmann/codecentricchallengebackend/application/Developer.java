@@ -1,4 +1,6 @@
 package de.kristianbergmann.codecentricchallengebackend.application;
 
-public record Developer(String pseudonym) {
-}
+import java.util.Arrays;
+import java.util.List;
+
+public record Developer(String pseudonym, List<SourceCodeRepository> repositories) { }

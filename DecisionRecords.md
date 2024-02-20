@@ -22,13 +22,21 @@
 - Mit Hinblick auf die Aufgabenstellung vorerst einfache Gliederung Mitarbeiter -hat-> Repos -hat-> Sprachen
 - Mit Hinblick auf Aufgabenstellung (mindestens vorerst) Gliederung des UseCase in Query und Show
 - Einschub vor Implementierung der echten github API-Abfrage: CI aufsetzen
-- Bauchgefühl: Use-Case degeneriert, wenn kein View generiert wird -> Entscheidung ob erst API implementieren, oder erst Use-Case mit Dummy-Daten
+- Bauchgefühl: Use-Case degeneriert, wenn kein View generiert wird -> Entscheidung ob erst API implementieren, oder erst Use-Case mit Dummy-Daten -> zuerst UseCase, da API schon manuell erkunded und wenig Überraschungen erwartet
+
+## Aufgabe 2
+- OP3 und OP4 entdeckt
+- SourceCodeLanguage als record (statt enum), weil Liste der Verfügbaren außerhalb unserer Kontrolle
 
 ## Offene Punkte
 - OP1: Sollen die Ergebnisse der Github-Abfrage persistiert werden? (Annahme: Nein, weil sonst Rattenschwanz über Caching-Dauer etc folgt)
 - OP2: Anforderung klären: Eigene Repos vs. Commits in andere Repos (Annahme: Wie in Aufgabe beschrieben: Repos der Mitarbeiter)
+- OP3: Struktur des Application-Datenmodells hinterfragen -> aktuell Github-Struktur übernommen
+- OP4: DisplayDeveloperLanguageProficiency.queryDeveloperProfiles private machen?
 
 ## Should have
+- Implementierung der echten github API-Abfrage
 
 ## Nice To Have
 - Tests in schnell und langsam auftrennen
+

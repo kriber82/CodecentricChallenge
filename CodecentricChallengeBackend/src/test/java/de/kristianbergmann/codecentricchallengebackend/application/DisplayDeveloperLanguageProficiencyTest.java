@@ -8,15 +8,21 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class QueryDeveloperLanguageProficiencyTest {
+public class DisplayDeveloperLanguageProficiencyTest {
 
-    private QueryDeveloperLanguageProficiency tested;
+    private final SourceCodeLanguage java = new SourceCodeLanguage("java");
+    private final SourceCodeLanguage typescript = new SourceCodeLanguage("typescript");
+    private final List<SourceCodeLanguage> myRepoLanguages = Arrays.asList(java, typescript);
+    private final SourceCodeRepository myRepo = new SourceCodeRepository("my-repo", myRepoLanguages);
+    private final Developer meDeveloper = new Developer("me", Arrays.asList(myRepo));
+
+    private DisplayDeveloperLanguageProficiency tested;
     private DeveloperProfilesInMemory forGettingDeveloperProfiles;
 
     @BeforeEach
     public void setup() {
         forGettingDeveloperProfiles = new DeveloperProfilesInMemory();
-        tested = new QueryDeveloperLanguageProficiency(forGettingDeveloperProfiles);
+        tested = new DisplayDeveloperLanguageProficiency(forGettingDeveloperProfiles);
     }
 
     @Test
@@ -27,10 +33,12 @@ public class QueryDeveloperLanguageProficiencyTest {
 
     @Test
     public void returnsDevelopersGivenByPort() {
-        Developer meDeveloper = new Developer("Me");
         forGettingDeveloperProfiles.setDevelopers(Arrays.asList(meDeveloper));
         List<Developer> developers = tested.queryDeveloperProfiles();
         assertThat(developers).containsExactly(meDeveloper);
+        assertThat(developers.get(0).repositories()).containsExactly(myRepo);
+        assertThat(developers.get(0).repositories().get(0).languages()).containsExactly(java, typescript);
     }
+
 
 }

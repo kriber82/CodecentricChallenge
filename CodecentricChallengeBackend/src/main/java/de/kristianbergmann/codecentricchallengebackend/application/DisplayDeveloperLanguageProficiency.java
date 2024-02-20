@@ -1,12 +1,11 @@
 package de.kristianbergmann.codecentricchallengebackend.application;
 
-import java.util.Collections;
 import java.util.List;
 
-public class QueryDeveloperLanguageProficiency {
+public class DisplayDeveloperLanguageProficiency {
     private final ForGettingDeveloperProfiles forGettingDeveloperProfiles;
 
-    public QueryDeveloperLanguageProficiency(ForGettingDeveloperProfiles forGettingDeveloperProfiles) {
+    public DisplayDeveloperLanguageProficiency(ForGettingDeveloperProfiles forGettingDeveloperProfiles) {
         this.forGettingDeveloperProfiles = forGettingDeveloperProfiles;
     }
 
