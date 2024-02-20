@@ -4,7 +4,10 @@
 
 - Spring Boot für den Backend-Teil nutzen um das Hinzufügen von Persistenz (Möglicherweise Teil von Aufgabe 1, Stichwort Datenbasis, siehe OP1) und einer REST-API fürs Web-Frontend (Aufgabe 3) zu erleichtern
 - Gemeinsames Repo für FE und BE um Konsistenten Stand sicherzustellen
-- Spring-Boot-freier Application Code für einfacheres Testen und einfachere Option auf Technologiewechsel (Hexagonal Architecture light)
+- Spring-Boot-freier Application Code für
+    - einfacheres Testen der Applikationslogik
+    - weniger Einfluss des Github-Datenmodells auf Applikations-Datenmodell
+    - einfachere Option auf Technologiewechsel durch klare Trennung (Ansatz: Hexagonal Architecture)
 - für Aufgabe 3 vmtl. React + Next, weil ich damit kürzlich etwas Erfahrung gesammelt habe
 - Setup von CI mit github Actions, wenn es nicht allzuviel Zeit benötigt
 - Bewußt overengineered (für die Aufgabengröße), um über Methodologie und SW-Design reden zu können
