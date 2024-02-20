@@ -28,9 +28,6 @@ jobs:
       run:
         working-directory: CodecentricChallengeBackend
 
-    permissions:
-      contents: read
-
     steps:
     - uses: actions/checkout@v4
 
