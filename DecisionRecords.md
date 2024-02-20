@@ -29,7 +29,6 @@
 - OP2: Anforderung klären: Eigene Repos vs. Commits in andere Repos (Annahme: Wie in Aufgabe beschrieben: Repos der Mitarbeiter)
 
 ## Should have
-- build & test in github actions
 
 ## Nice To Have
 - Tests in schnell und langsam auftrennen
