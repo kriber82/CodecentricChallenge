@@ -1,4 +1,4 @@
 package de.kristianbergmann.codecentricchallengebackend.application;
 
-public class Developer {
+public record Developer(String pseudonym) {
 }

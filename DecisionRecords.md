@@ -20,7 +20,16 @@
     - languages_url -> https://api.github.com/repos/denniseffing/istio-chaos-demo/languages
     - OP 2 (s.u.)
 - Mit Hinblick auf die Aufgabenstellung vorerst einfache Gliederung Mitarbeiter -hat-> Repos -hat-> Sprachen
+- Mit Hinblick auf Aufgabenstellung (mindestens vorerst) Gliederung des UseCase in Query und Show
+- Einschub vor Implementierung der echten github API-Abfrage: CI aufsetzen
+- Bauchgefühl: Use-Case degeneriert, wenn kein View generiert wird -> Entscheidung ob erst API implementieren, oder erst Use-Case mit Dummy-Daten
 
 ## Offene Punkte
-    - OP1: Sollen die Ergebnisse der Github-Abfrage persistiert werden? (Annahme: Nein, weil sonst Rattenschwanz über Caching-Dauer etc folgt)
-    - OP2: Anforderung klären: Eigene Repos vs. Commits in andere Repos (Annahme: Wie in Aufgabe beschrieben: Repos der Mitarbeiter)
+- OP1: Sollen die Ergebnisse der Github-Abfrage persistiert werden? (Annahme: Nein, weil sonst Rattenschwanz über Caching-Dauer etc folgt)
+- OP2: Anforderung klären: Eigene Repos vs. Commits in andere Repos (Annahme: Wie in Aufgabe beschrieben: Repos der Mitarbeiter)
+
+## Should have
+- build & test in github actions
+
+## Nice To Have
+- Tests in schnell und langsam auftrennen
