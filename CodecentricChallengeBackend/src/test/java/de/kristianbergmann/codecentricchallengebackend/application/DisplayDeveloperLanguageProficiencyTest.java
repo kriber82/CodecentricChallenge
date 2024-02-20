@@ -94,8 +94,6 @@ public class DisplayDeveloperLanguageProficiencyTest {
         assertThat(shown.developers().size()).isEqualTo(0);
     }
 
-    //TODO repos without languages
-
     private static class ShowDeveloperProficienciesDummy implements ForShowingDeveloperProficiencies {
         public DeveloperLanguageProficiencies lastShown = null;
 

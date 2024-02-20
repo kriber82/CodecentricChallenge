@@ -30,7 +30,7 @@ vermeiden
 - OP3 und OP4 entdeckt
 - SourceCodeLanguage als record statt enum, weil Liste der Verfügbaren außerhalb unserer Kontrolle
 - kein use-case package in application, um Verwirrung durch tiefe Package-Struktur ohne Inhalte zu 
-- 
+- Test für github abfrage in möglichst wenigen Testcases wegen Test-Laufzeit und api-Nutzung
 
 ## Offene Punkte
 - OP1: Sollen die Ergebnisse der Github-Abfrage persistiert werden? (Annahme: Nein, weil sonst Rattenschwanz über Caching-Dauer etc folgt)
@@ -40,6 +40,7 @@ vermeiden
 
 ## Should have
 - Implementierung der echten github API-Abfrage
+- GetCodecentricDeveloperProfilesFromGithub: use profile display name instead of login
 
 ## Nice To Have
 - Tests in schnell und langsam auftrennen
