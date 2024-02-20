@@ -11,7 +11,7 @@ public class GetCodecentricDeveloperProfilesFromGithubTest {
 
     @BeforeEach
     public void setup() {
-        tested = new GetCodecentricDeveloperProfilesFromGithub();
+        tested = new GetCodecentricDeveloperProfilesFromGithub(2);
     }
 
     @Test
@@ -35,17 +35,17 @@ public class GetCodecentricDeveloperProfilesFromGithubTest {
         assertThat(languages.stream().map(ProgrammingLanguage::name)).contains("Java", "Dockerfile");
     }
 
-    //@Test
+    @Test
     public void queriesCodecentricDevelopersFromGithub() {
-        //TODO hits API rate limit too fast
         var developers = tested.getDevelopers();
-        assertThat(developers.size()).isEqualTo(30);
+        assertThat(developers.size()).isEqualTo(2);
 
-        var dennisEffing = developers.stream().filter(d -> d.name().equals("denniseffing")).findFirst().get();
-        assertThat(dennisEffing.repositories().size()).isEqualTo(30);
+        var dev = developers.stream().filter(d -> d.name().equals("danielbayerlein")).findFirst().get();
+        assertThat(dev.repositories().size()).isEqualTo(2);
 
-        var istioChaosDemo = dennisEffing.repositories().stream().filter(r -> r.name().equals("istio-chaos-demo")).findFirst().get();
-        assertThat(istioChaosDemo.languages()).contains(new ProgrammingLanguage("java"), new ProgrammingLanguage("dockerfile"));
+        var repo = dev.repositories().stream().filter(r -> r.name().equals("amplify-js")).findFirst().get();
+        assertThat(repo.languages().size()).isEqualTo(10);
+        assertThat(repo.languages().stream().map(ProgrammingLanguage::name)).contains("TypeScript", "HTML");
     }
 
 }

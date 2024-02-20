@@ -11,19 +11,31 @@ import java.util.*;
 
 public class GetCodecentricDeveloperProfilesFromGithub implements ForGettingDeveloperProfiles {
 
+    private final int maxChildRequests;
+
+    public GetCodecentricDeveloperProfilesFromGithub() {
+        this(Integer.MAX_VALUE);
+    }
+
+    public GetCodecentricDeveloperProfilesFromGithub(int maxChildRequests) {
+        this.maxChildRequests = maxChildRequests;
+    }
+
     @Override
     public List<Developer> getDevelopers() {
 
         GithubProfileJson[] profiles = getOrganizationMembers("https://api.github.com/orgs/codecentric/members");
+        return Arrays.stream(profiles).limit(maxChildRequests).parallel().map(p -> toDeveloper(p, maxChildRequests)).toList();
+    }
 
-        //TODO parallel requests (needs authentication)
-        //var result = Arrays.stream(profiles).parallel().map(p -> new Developer(p.login, getRepositories(p))).toList(); //TODO use display name instead of login
+    private Developer toDeveloper(GithubProfileJson p, int maxChildRequests) {
+        var repos = Arrays.stream(getRepositories(p.repos_url)).limit(maxChildRequests).parallel().map(this::toRepo).toList();
+        return new Developer(p.login, repos); //TODO use display name instead of login
+    }
 
-        //return Arrays.stream(response).map(r -> new SourceCodeRepository(r.name, getLanguages(r))).toList();
-
-        //return result;
-
-        return Collections.emptyList();
+    private SourceCodeRepository toRepo(GithubRepositoryJson r) {
+        var languages = getLanguages(r.languages_url);
+        return new SourceCodeRepository(r.name, languages);
     }
 
     public GithubProfileJson[] getOrganizationMembers(String organizationMembersUrl) {
