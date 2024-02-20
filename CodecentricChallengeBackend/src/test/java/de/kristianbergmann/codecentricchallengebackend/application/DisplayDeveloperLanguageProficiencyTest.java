@@ -4,12 +4,14 @@ import de.kristianbergmann.codecentricchallengebackend.application.datamodel.Dev
 import de.kristianbergmann.codecentricchallengebackend.application.datamodel.SourceCodeLanguage;
 import de.kristianbergmann.codecentricchallengebackend.application.datamodel.SourceCodeRepository;
 import de.kristianbergmann.codecentricchallengebackend.application.viewmodel.DeveloperLanguageProficiencies;
+import de.kristianbergmann.codecentricchallengebackend.application.viewmodel.DeveloperLanguageProficiency;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -17,9 +19,9 @@ public class DisplayDeveloperLanguageProficiencyTest {
 
     private final SourceCodeLanguage java = new SourceCodeLanguage("java");
     private final SourceCodeLanguage typescript = new SourceCodeLanguage("typescript");
-    private final List<SourceCodeLanguage> myRepoLanguages = Arrays.asList(java, typescript);
-    private final SourceCodeRepository myRepo = new SourceCodeRepository("my-repo", myRepoLanguages);
-    private final Developer meDeveloper = new Developer("me", Arrays.asList(myRepo));
+    private final List<SourceCodeLanguage> kristiansRepoLanguages = Arrays.asList(java, typescript);
+    private final SourceCodeRepository kristiansRepo = new SourceCodeRepository("my-repo", kristiansRepoLanguages);
+    private final Developer kristian = new Developer("Kristian", Arrays.asList(kristiansRepo));
 
     private DisplayDeveloperLanguageProficiency tested;
     private DeveloperProfilesInMemory forGettingDeveloperProfiles;
@@ -39,15 +41,26 @@ public class DisplayDeveloperLanguageProficiencyTest {
         assertThat(forShowingDeveloperProfiles.lastShown).isEqualTo(new DeveloperLanguageProficiencies(Collections.emptyList()));
     }
 
-    //TODO refactor to test of showDeveloperProfiles
     @Test
-    public void returnsDevelopersGivenByPort() {
-        forGettingDeveloperProfiles.setDevelopers(Arrays.asList(meDeveloper));
-        List<Developer> developers = tested.queryDeveloperProfiles();
-        assertThat(developers).containsExactly(meDeveloper);
-        assertThat(developers.get(0).repositories()).containsExactly(myRepo);
-        assertThat(developers.get(0).repositories().get(0).languages()).containsExactly(java, typescript);
+    public void showsDeveloperLanguagesForSingleDevAndRepo() {
+        forGettingDeveloperProfiles.setDevelopers(List.of(kristian));
+
+        tested.showDeveloperProfiles();
+
+        var shown = forShowingDeveloperProfiles.lastShown;
+        assertThat(shown.developers().size()).isEqualTo(1);
+        
+        var kristiansProficiency = shown.developers().get(0);
+        assertThat(kristiansProficiency.developerName()).isEqualTo("Kristian");
+
+        var kristiansLanguageCounts = kristiansProficiency.repoCountByLanguage();
+        assertThat(kristiansLanguageCounts.size()).isEqualTo(2);
+        assertThat(kristiansLanguageCounts.get(java)).isEqualTo(1);
+        assertThat(kristiansLanguageCounts.get(typescript)).isEqualTo(1);
     }
+
+    //TODO several repos with same language
+    //TODO users without repos
 
     private static class ShowDeveloperProficienciesDummy implements ForShowingDeveloperProficiencies {
         public DeveloperLanguageProficiencies lastShown = null;

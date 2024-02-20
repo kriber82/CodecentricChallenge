@@ -26,7 +26,7 @@
 
 ## Aufgabe 2
 - OP3 und OP4 entdeckt
-- SourceCodeLanguage als record (statt enum), weil Liste der Verfügbaren außerhalb unserer Kontrolle
+- SourceCodeLanguage als record statt enum, weil Liste der Verfügbaren außerhalb unserer Kontrolle
 
 ## Offene Punkte
 - OP1: Sollen die Ergebnisse der Github-Abfrage persistiert werden? (Annahme: Nein, weil sonst Rattenschwanz über Caching-Dauer etc folgt)
@@ -36,6 +36,7 @@
 
 ## Should have
 - Implementierung der echten github API-Abfrage
+- Use developers real name instead of pseudonym
 
 ## Nice To Have
 - Tests in schnell und langsam auftrennen

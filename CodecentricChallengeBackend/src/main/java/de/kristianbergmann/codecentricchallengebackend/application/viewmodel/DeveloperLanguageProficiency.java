@@ -1,4 +1,8 @@
 package de.kristianbergmann.codecentricchallengebackend.application.viewmodel;
 
-public record DeveloperLanguageProficiency() {
+import de.kristianbergmann.codecentricchallengebackend.application.datamodel.SourceCodeLanguage;
+
+import java.util.Map;
+
+public record DeveloperLanguageProficiency(String developerName, Map<SourceCodeLanguage, Integer> repoCountByLanguage) {
 }
