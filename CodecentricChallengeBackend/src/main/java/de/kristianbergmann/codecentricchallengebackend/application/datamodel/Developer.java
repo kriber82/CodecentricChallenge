@@ -1,6 +1,5 @@
-package de.kristianbergmann.codecentricchallengebackend.application;
+package de.kristianbergmann.codecentricchallengebackend.application.datamodel;
 
-import java.util.Arrays;
 import java.util.List;
 
 public record Developer(String pseudonym, List<SourceCodeRepository> repositories) { }
