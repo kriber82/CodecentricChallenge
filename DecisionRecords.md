@@ -25,6 +25,8 @@
 - Einschub vor Implementierung der echten github API-Abfrage: CI aufsetzen
 - Bauchgefühl: Use-Case degeneriert, wenn kein View generiert wird -> Entscheidung ob erst API implementieren, oder erst Use-Case mit Dummy-Daten -> zuerst UseCase, da API schon manuell erkunded und wenig Überraschungen erwartet
 vermeiden
+- OP5 entdeckt
+- 
 
 ## Aufgabe 2
 - OP3 und OP4 entdeckt
@@ -37,11 +39,15 @@ vermeiden
 - OP2: Anforderung klären: Eigene Repos vs. Commits in andere Repos (Annahme: Wie in Aufgabe beschrieben: Repos der Mitarbeiter)
 - OP3: Struktur des Application-Datenmodells hinterfragen -> aktuell Github-Struktur übernommen
 - OP4: DisplayDeveloperLanguageProficiency.queryDeveloperProfiles private machen?
+- OP5: Ergebnisse der github-requests liefern je 30 einträge -> rate limit?
 
 ## Should have
+- rewire github api response translation (torn apart due to API rate limits)
 - Implementierung der echten github API-Abfrage
 - GetCodecentricDeveloperProfilesFromGithub: use profile display name instead of login
+- GetCodecentricDeveloperProfilesFromGithub: Bearer Token nicht im Source Code speichern
 
 ## Nice To Have
 - Tests in schnell und langsam auftrennen
+- Client/Request pooling in GetCodecentricDeveloperProfilesFromGithub
 
