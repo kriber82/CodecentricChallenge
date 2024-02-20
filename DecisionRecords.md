@@ -7,6 +7,7 @@
 - Spring-Boot-freier Application Code für einfacheres Testen und einfachere Option auf Technologiewechsel (Hexagonal Architecture light)
 - für Aufgabe 3 vmtl. React + Next, weil ich damit kürzlich etwas Erfahrung gesammelt habe
 - Setup von CI mit github Actions, wenn es nicht allzuviel Zeit benötigt
+- Bewußt overengineered (für die Aufgabengröße), um über Methodologie und SW-Design reden zu können
 
 ## Aufgabe 1
 
@@ -23,10 +24,13 @@
 - Mit Hinblick auf Aufgabenstellung (mindestens vorerst) Gliederung des UseCase in Query und Show
 - Einschub vor Implementierung der echten github API-Abfrage: CI aufsetzen
 - Bauchgefühl: Use-Case degeneriert, wenn kein View generiert wird -> Entscheidung ob erst API implementieren, oder erst Use-Case mit Dummy-Daten -> zuerst UseCase, da API schon manuell erkunded und wenig Überraschungen erwartet
+vermeiden
 
 ## Aufgabe 2
 - OP3 und OP4 entdeckt
 - SourceCodeLanguage als record statt enum, weil Liste der Verfügbaren außerhalb unserer Kontrolle
+- kein use-case package in application, um Verwirrung durch tiefe Package-Struktur ohne Inhalte zu 
+- 
 
 ## Offene Punkte
 - OP1: Sollen die Ergebnisse der Github-Abfrage persistiert werden? (Annahme: Nein, weil sonst Rattenschwanz über Caching-Dauer etc folgt)
@@ -36,7 +40,6 @@
 
 ## Should have
 - Implementierung der echten github API-Abfrage
-- Use developers real name instead of pseudonym
 
 ## Nice To Have
 - Tests in schnell und langsam auftrennen

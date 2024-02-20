@@ -1,27 +1,29 @@
 package de.kristianbergmann.codecentricchallengebackend.application;
 
 import de.kristianbergmann.codecentricchallengebackend.application.datamodel.Developer;
-import de.kristianbergmann.codecentricchallengebackend.application.datamodel.SourceCodeLanguage;
+import de.kristianbergmann.codecentricchallengebackend.application.datamodel.ProgrammingLanguage;
 import de.kristianbergmann.codecentricchallengebackend.application.datamodel.SourceCodeRepository;
 import de.kristianbergmann.codecentricchallengebackend.application.viewmodel.DeveloperLanguageProficiencies;
-import de.kristianbergmann.codecentricchallengebackend.application.viewmodel.DeveloperLanguageProficiency;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class DisplayDeveloperLanguageProficiencyTest {
 
-    private final SourceCodeLanguage java = new SourceCodeLanguage("java");
-    private final SourceCodeLanguage typescript = new SourceCodeLanguage("typescript");
-    private final List<SourceCodeLanguage> kristiansRepoLanguages = Arrays.asList(java, typescript);
-    private final SourceCodeRepository kristiansRepo = new SourceCodeRepository("my-repo", kristiansRepoLanguages);
-    private final Developer kristian = new Developer("Kristian", Arrays.asList(kristiansRepo));
+    private final ProgrammingLanguage java = new ProgrammingLanguage("java");
+    private final ProgrammingLanguage typescript = new ProgrammingLanguage("typescript");
+    private final ProgrammingLanguage php = new ProgrammingLanguage("PHP");
+
+    private final List<ProgrammingLanguage> javaAndTypescriptLanguages = Arrays.asList(java, typescript);
+    private final SourceCodeRepository javaAndTypescriptRepo = new SourceCodeRepository("j-and-t-repo", javaAndTypescriptLanguages);
+
+    private final List<ProgrammingLanguage> javaAndPhpLanguages = Arrays.asList(java, php);
+    private final SourceCodeRepository javaAndPhpRepo = new SourceCodeRepository("j-and-p-repo", javaAndPhpLanguages);
 
     private DisplayDeveloperLanguageProficiency tested;
     private DeveloperProfilesInMemory forGettingDeveloperProfiles;
@@ -43,24 +45,56 @@ public class DisplayDeveloperLanguageProficiencyTest {
 
     @Test
     public void showsDeveloperLanguagesForSingleDevAndRepo() {
-        forGettingDeveloperProfiles.setDevelopers(List.of(kristian));
+        var singleRepoDev = new Developer("A Dev", Arrays.asList(javaAndTypescriptRepo));
+        forGettingDeveloperProfiles.setDevelopers(List.of(singleRepoDev));
+
+        tested.showDeveloperProfiles();
+
+        var languageCounts = forShowingDeveloperProfiles.lastShown.developers().get(0).repoCountByLanguage();
+        assertThat(languageCounts.size()).isEqualTo(2);
+        assertThat(languageCounts.get(java)).isEqualTo(1);
+        assertThat(languageCounts.get(typescript)).isEqualTo(1);
+    }
+
+    @Test
+    public void aggregatesLanguagesFromMultipleReposOfSameUser() {
+        var multiRepoDev = new Developer("A Dev", Arrays.asList(javaAndTypescriptRepo, javaAndPhpRepo));
+        forGettingDeveloperProfiles.setDevelopers(List.of(multiRepoDev));
+
+        tested.showDeveloperProfiles();
+
+        var languageCounts = forShowingDeveloperProfiles.lastShown.developers().get(0).repoCountByLanguage();
+        assertThat(languageCounts.size()).isEqualTo(3);
+        assertThat(languageCounts.get(java)).isEqualTo(2);
+        assertThat(languageCounts.get(typescript)).isEqualTo(1);
+        assertThat(languageCounts.get(php)).isEqualTo(1);
+    }
+
+    @Test
+    public void containsOneProficiencyEntryPerDeveloper() {
+        var dev1 = new Developer("Dev 1", Arrays.asList(javaAndTypescriptRepo));
+        var dev2 = new Developer("Dev 2", Arrays.asList(javaAndPhpRepo));
+        forGettingDeveloperProfiles.setDevelopers(List.of(dev1, dev2));
 
         tested.showDeveloperProfiles();
 
         var shown = forShowingDeveloperProfiles.lastShown;
-        assertThat(shown.developers().size()).isEqualTo(1);
-        
-        var kristiansProficiency = shown.developers().get(0);
-        assertThat(kristiansProficiency.developerName()).isEqualTo("Kristian");
-
-        var kristiansLanguageCounts = kristiansProficiency.repoCountByLanguage();
-        assertThat(kristiansLanguageCounts.size()).isEqualTo(2);
-        assertThat(kristiansLanguageCounts.get(java)).isEqualTo(1);
-        assertThat(kristiansLanguageCounts.get(typescript)).isEqualTo(1);
+        assertThat(shown.developers().stream().map(d -> d.developerName()).toList()).
+                containsExactly("Dev 1", "Dev 2");
     }
 
-    //TODO several repos with same language
-    //TODO users without repos
+    @Test
+    public void discardsDevelopersWithoutLanguageProficiencies() {
+        var noRepoDev = new Developer("A Dev", Collections.emptyList());
+        forGettingDeveloperProfiles.setDevelopers(List.of(noRepoDev));
+
+        tested.showDeveloperProfiles();
+
+        var shown = forShowingDeveloperProfiles.lastShown;
+        assertThat(shown.developers().size()).isEqualTo(0);
+    }
+
+    //TODO repos without languages
 
     private static class ShowDeveloperProficienciesDummy implements ForShowingDeveloperProficiencies {
         public DeveloperLanguageProficiencies lastShown = null;

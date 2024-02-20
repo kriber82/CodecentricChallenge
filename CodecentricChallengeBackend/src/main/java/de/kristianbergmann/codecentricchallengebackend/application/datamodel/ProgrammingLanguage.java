@@ -1,3 +1,3 @@
 package de.kristianbergmann.codecentricchallengebackend.application.datamodel;
 
-public record SourceCodeLanguage (String name) { }
+public record ProgrammingLanguage(String name) { }
