@@ -1,9 +1,9 @@
 package de.kristianbergmann.codecentricchallengebackend.adapters.consoleUi;
 
-import de.kristianbergmann.codecentricchallengebackend.application.ForShowingDeveloperProficiencies;
+import de.kristianbergmann.codecentricchallengebackend.application.viewmodel.ForShowingDeveloperProficiencies;
 import de.kristianbergmann.codecentricchallengebackend.application.viewmodel.DeveloperLanguageProficiencies;
 
-public class ShowDeveloperProfilesInConsole implements ForShowingDeveloperProficiencies {
+public class ShowDeveloperProficienciesInConsole implements ForShowingDeveloperProficiencies {
 
     @Override
     public void show(DeveloperLanguageProficiencies shown) {

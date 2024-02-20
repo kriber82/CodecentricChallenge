@@ -1,6 +1,6 @@
 package de.kristianbergmann.codecentricchallengebackend.adapters.githubApi;
 
-import de.kristianbergmann.codecentricchallengebackend.application.ForGettingDeveloperProfiles;
+import de.kristianbergmann.codecentricchallengebackend.application.datamodel.ForGettingDeveloperProfiles;
 import de.kristianbergmann.codecentricchallengebackend.application.datamodel.Developer;
 import de.kristianbergmann.codecentricchallengebackend.application.datamodel.ProgrammingLanguage;
 import de.kristianbergmann.codecentricchallengebackend.application.datamodel.SourceCodeRepository;

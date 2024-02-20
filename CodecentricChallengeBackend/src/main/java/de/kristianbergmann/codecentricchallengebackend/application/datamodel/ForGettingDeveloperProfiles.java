@@ -1,4 +1,4 @@
-package de.kristianbergmann.codecentricchallengebackend.application;
+package de.kristianbergmann.codecentricchallengebackend.application.datamodel;
 
 import de.kristianbergmann.codecentricchallengebackend.application.datamodel.Developer;
 

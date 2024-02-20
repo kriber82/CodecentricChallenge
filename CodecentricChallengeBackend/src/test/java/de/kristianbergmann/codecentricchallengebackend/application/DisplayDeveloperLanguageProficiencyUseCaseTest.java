@@ -1,9 +1,11 @@
 package de.kristianbergmann.codecentricchallengebackend.application;
 
 import de.kristianbergmann.codecentricchallengebackend.application.datamodel.Developer;
+import de.kristianbergmann.codecentricchallengebackend.application.datamodel.DeveloperProfilesInMemory;
 import de.kristianbergmann.codecentricchallengebackend.application.datamodel.ProgrammingLanguage;
 import de.kristianbergmann.codecentricchallengebackend.application.datamodel.SourceCodeRepository;
 import de.kristianbergmann.codecentricchallengebackend.application.viewmodel.DeveloperLanguageProficiencies;
+import de.kristianbergmann.codecentricchallengebackend.application.viewmodel.ShowDeveloperProficienciesDummy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +15,11 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class DisplayDeveloperLanguageProficiencyTest {
+public class DisplayDeveloperLanguageProficiencyUseCaseTest {
+
+    private DisplayDeveloperLanguageProficiencyUseCase tested;
+    private DeveloperProfilesInMemory forGettingDeveloperProfiles;
+    private ShowDeveloperProficienciesDummy forShowingDeveloperProfiles;
 
     private final ProgrammingLanguage java = new ProgrammingLanguage("java");
     private final ProgrammingLanguage typescript = new ProgrammingLanguage("typescript");
@@ -25,15 +31,11 @@ public class DisplayDeveloperLanguageProficiencyTest {
     private final List<ProgrammingLanguage> javaAndPhpLanguages = Arrays.asList(java, php);
     private final SourceCodeRepository javaAndPhpRepo = new SourceCodeRepository("j-and-p-repo", javaAndPhpLanguages);
 
-    private DisplayDeveloperLanguageProficiency tested;
-    private DeveloperProfilesInMemory forGettingDeveloperProfiles;
-    private ShowDeveloperProficienciesDummy forShowingDeveloperProfiles;
-
     @BeforeEach
     public void setup() {
         forGettingDeveloperProfiles = new DeveloperProfilesInMemory();
         forShowingDeveloperProfiles = new ShowDeveloperProficienciesDummy();
-        tested = new DisplayDeveloperLanguageProficiency(forGettingDeveloperProfiles, forShowingDeveloperProfiles);
+        tested = new DisplayDeveloperLanguageProficiencyUseCase(forGettingDeveloperProfiles, forShowingDeveloperProfiles);
     }
 
     @Test
@@ -94,12 +96,4 @@ public class DisplayDeveloperLanguageProficiencyTest {
         assertThat(shown.developers().size()).isEqualTo(0);
     }
 
-    private static class ShowDeveloperProficienciesDummy implements ForShowingDeveloperProficiencies {
-        public DeveloperLanguageProficiencies lastShown = null;
-
-        @Override
-        public void show(DeveloperLanguageProficiencies shown) {
-            lastShown = shown;
-        }
-    }
 }

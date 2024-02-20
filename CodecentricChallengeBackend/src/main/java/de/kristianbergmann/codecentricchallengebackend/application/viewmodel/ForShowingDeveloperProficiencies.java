@@ -1,4 +1,4 @@
-package de.kristianbergmann.codecentricchallengebackend.application;
+package de.kristianbergmann.codecentricchallengebackend.application.viewmodel;
 
 import de.kristianbergmann.codecentricchallengebackend.application.viewmodel.DeveloperLanguageProficiencies;
 

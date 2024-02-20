@@ -1,26 +1,24 @@
 package de.kristianbergmann.codecentricchallengebackend.application;
 
 import de.kristianbergmann.codecentricchallengebackend.application.datamodel.Developer;
+import de.kristianbergmann.codecentricchallengebackend.application.datamodel.ForGettingDeveloperProfiles;
 import de.kristianbergmann.codecentricchallengebackend.application.datamodel.ProgrammingLanguage;
 import de.kristianbergmann.codecentricchallengebackend.application.viewmodel.DeveloperLanguageProficiencies;
 import de.kristianbergmann.codecentricchallengebackend.application.viewmodel.DeveloperLanguageProficiency;
+import de.kristianbergmann.codecentricchallengebackend.application.viewmodel.ForShowingDeveloperProficiencies;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DisplayDeveloperLanguageProficiency {
+public class DisplayDeveloperLanguageProficiencyUseCase {
     private final ForGettingDeveloperProfiles forGettingDeveloperProfiles;
     private final ForShowingDeveloperProficiencies forShowingDeveloperProfiles;
 
-    public DisplayDeveloperLanguageProficiency(ForGettingDeveloperProfiles forGettingDeveloperProfiles, ForShowingDeveloperProficiencies forShowingDeveloperProfiles) {
+    public DisplayDeveloperLanguageProficiencyUseCase(ForGettingDeveloperProfiles forGettingDeveloperProfiles, ForShowingDeveloperProficiencies forShowingDeveloperProfiles) {
         this.forGettingDeveloperProfiles = forGettingDeveloperProfiles;
         this.forShowingDeveloperProfiles = forShowingDeveloperProfiles;
-    }
-
-    public List<Developer> queryDeveloperProfiles() {
-        return forGettingDeveloperProfiles.getDevelopers();
     }
 
     public void showDeveloperProfiles() {
@@ -32,6 +30,10 @@ public class DisplayDeveloperLanguageProficiency {
                 proficiencies.add(new DeveloperLanguageProficiency(dev.name(), repoCountsByLanguage));
         }
         forShowingDeveloperProfiles.show(new DeveloperLanguageProficiencies(proficiencies));
+    }
+
+    private List<Developer> queryDeveloperProfiles() {
+        return forGettingDeveloperProfiles.getDevelopers();
     }
 
     private static Map<ProgrammingLanguage, Integer> getRepoCountsByLanguage(Developer dev) {

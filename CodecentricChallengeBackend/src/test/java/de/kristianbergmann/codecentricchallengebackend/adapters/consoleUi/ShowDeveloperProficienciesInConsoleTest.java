@@ -11,17 +11,17 @@ import java.util.HashMap;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ShowDeveloperProfilesInConsoleTest {
+public class ShowDeveloperProficienciesInConsoleTest {
     @Test
     public void rendersEmptyStringForEmptyProfiles() {
-        var tested = new ShowDeveloperProfilesInConsole();
+        var tested = new ShowDeveloperProficienciesInConsole();
         var renderedString = tested.renderShownString(new DeveloperLanguageProficiencies(Collections.emptyList()));
         assertThat(renderedString).isEmpty();
     }
 
     @Test
     public void rendersStringForProfiles() {
-        var tested = new ShowDeveloperProfilesInConsole();
+        var tested = new ShowDeveloperProficienciesInConsole();
 
         var dev1Languages = new HashMap<ProgrammingLanguage, Integer>() {{
             put(new ProgrammingLanguage("Java"), 2);
