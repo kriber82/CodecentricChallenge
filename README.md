@@ -6,6 +6,8 @@ Ich habe bei ca. 4 Stunden einen Commit gemacht (steht im Commit-Kommentar), war
 
 Ich habe mich bewusst zum Overengineering (in Verhältnis zur Problem- und Lösungsgröße) entschieden, um einen besseren Eindruck meiner Arbeitsweise in realistisch großen Projekten zu vermitteln. Die so in SW-Design, Testbarkeit und Infrastruktur gesteckte Zeit hat am Ende zur rechtzeitigen Fertigstellung der verpflichtenden Aufgabenteile gefehlt.
 
+Die Struktur des Backend-Projekts (CodecentricChallengeBackend) orientiert sich an der Hexagonalen Architektur: Der Use-Case mit seinen Ports und Datenklassen ist im ...application Package und seinen Unterpackages hinterlegt. Adapter für die github API und eine Konsolen UI liegen in den Packages (...adapters.githubApi und ...adapters.consoleUi)
+
 Die Bearbeitung der Aufgabe 3 habe ich aufgrund der bereits aufgebrauchten Zeit bisher nicht begonnen.
 
 Interessante Orte im Repo:
