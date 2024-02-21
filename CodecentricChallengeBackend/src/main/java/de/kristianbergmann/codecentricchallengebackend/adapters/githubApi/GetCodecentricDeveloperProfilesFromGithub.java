@@ -4,6 +4,8 @@ import de.kristianbergmann.codecentricchallengebackend.application.datamodel.For
 import de.kristianbergmann.codecentricchallengebackend.application.datamodel.Developer;
 import de.kristianbergmann.codecentricchallengebackend.application.datamodel.ProgrammingLanguage;
 import de.kristianbergmann.codecentricchallengebackend.application.datamodel.SourceCodeRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.web.client.RestClient;
 
@@ -11,6 +13,9 @@ import java.util.*;
 
 public class GetCodecentricDeveloperProfilesFromGithub implements ForGettingDeveloperProfiles {
 
+    private final static Logger logger = LoggerFactory.getLogger(GetCodecentricDeveloperProfilesFromGithub.class);
+
+    private final String githubBearerToken;
     private final int maxChildRequests;
 
     public GetCodecentricDeveloperProfilesFromGithub() {
@@ -19,6 +24,9 @@ public class GetCodecentricDeveloperProfilesFromGithub implements ForGettingDeve
 
     public GetCodecentricDeveloperProfilesFromGithub(int maxChildRequests) {
         this.maxChildRequests = maxChildRequests;
+        this.githubBearerToken = System.getenv("GITHUB_API_TOKEN");
+        if (this.githubBearerToken == null)
+            logger.warn("GITHUB_API_TOKEN not found. Github API requests will be rate-limited.\nPlease store a Github API token in the environment variable GITHUB_API_TOKEN.");
     }
 
     @Override
@@ -67,10 +75,11 @@ public class GetCodecentricDeveloperProfilesFromGithub implements ForGettingDeve
         return response.keySet().stream().map(ProgrammingLanguage::new).toList();
     }
 
-    private static RestClient buildAuthorizingClient() {
-        return RestClient.builder().
-                defaultHeader("Authorization", "Bearer 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").
-                build();
+    private RestClient buildAuthorizingClient() {
+        var builder = RestClient.builder();
+        if (githubBearerToken != null)
+            builder.defaultHeader("Authorization", "Bearer " + githubBearerToken);
+        return builder.build();
     }
 
 }

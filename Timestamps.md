@@ -23,5 +23,5 @@ Diese Rekonstruktion habe ich (außerhalb der gemessenen Zeit) vor allem für mi
 - Unterbrechung bis 22:32 (Gesamtzeit bis dahin: 4:24)
 - 4:41 - Console UI Adapter implementiert (17 Minuten, Uhrzeit: 22:50)
 - 4:57 - Konsolen-Applikation mit Console UI Adapter und Github-API implementiert (14 Minuten, Uhrzeit: 23:04, Gesamtzeit 2 Minuten hoher als fortlaufend durch aufsummierte Rundungsfehler)
-
+- 5:15 - Security: Github API Token: hardcoded & eingecheckt -> Umgebungsvariable (17 Minuten)
 
