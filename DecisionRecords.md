@@ -11,6 +11,8 @@
 - für Aufgabe 3 vmtl. React + Next, weil ich damit kürzlich etwas Erfahrung gesammelt habe
 - Setup von CI mit github Actions, wenn es nicht allzuviel Zeit benötigt
 - Bewußt overengineered (für die Aufgabengröße), um über Methodologie und SW-Design reden zu können
+- Regelmäßige Commits, um einen besseren Einblick in meine Arbeitsweise zu ermöglichen
+- Im Backend TDD als Standardherangehensweise
 
 ## Aufgabe 1 - Application Anteil
 
