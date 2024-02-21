@@ -36,8 +36,11 @@ public class GetCodecentricDeveloperProfilesFromGithubTest {
     }
 
     @Test
-    public void queriesCodecentricDevelopersFromGithub() {
+    public void compilesDatamodelForUsecaseUsingGithubQueriesInternally() {
+        //note that child requests are limited to 2 in setup
+
         var developers = tested.getDevelopers();
+
         assertThat(developers.size()).isEqualTo(2);
 
         var dev = developers.stream().filter(d -> d.name().equals("danielbayerlein")).findFirst().get();

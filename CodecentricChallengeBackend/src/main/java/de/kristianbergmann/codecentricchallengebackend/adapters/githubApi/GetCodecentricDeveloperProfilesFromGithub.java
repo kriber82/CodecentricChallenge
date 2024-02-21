@@ -33,11 +33,19 @@ public class GetCodecentricDeveloperProfilesFromGithub implements ForGettingDeve
     public List<Developer> getDevelopers() {
 
         GithubProfileJson[] profiles = getOrganizationMembers("https://api.github.com/orgs/codecentric/members");
-        return Arrays.stream(profiles).limit(maxChildRequests).parallel().map(p -> toDeveloper(p, maxChildRequests)).toList();
+        return Arrays.stream(profiles).
+                limit(maxChildRequests).
+                parallel().
+                map(p -> toDeveloper(p, maxChildRequests)).
+                toList();
     }
 
     private Developer toDeveloper(GithubProfileJson p, int maxChildRequests) {
-        var repos = Arrays.stream(getRepositories(p.repos_url)).limit(maxChildRequests).parallel().map(this::toRepo).toList();
+        var repos = Arrays.stream(getRepositories(p.repos_url)).
+                limit(maxChildRequests).
+                parallel().
+                map(this::toRepo).
+                toList();
         return new Developer(p.login, repos); //TODO use display name instead of login
     }
 
