@@ -32,7 +32,7 @@ public class GetCodecentricDeveloperProfilesFromGithub implements ForGettingDeve
     @Override
     public List<Developer> getDevelopers() {
 
-        GithubProfileJson[] profiles = getOrganizationMembers("https://api.github.com/orgs/codecentric/members").payload();
+        GithubProfileJson[] profiles = getOrganizationMembers("https://api.github.com/orgs/codecentric/members");
         return Arrays.stream(profiles).
                 limit(maxChildRequests).
                 parallel().
@@ -54,25 +54,13 @@ public class GetCodecentricDeveloperProfilesFromGithub implements ForGettingDeve
         return new SourceCodeRepository(r.name, languages);
     }
 
-    public PaginatedResult<GithubProfileJson> getOrganizationMembers(String organizationMembersUrl) {
+    public GithubProfileJson[] getOrganizationMembers(String organizationMembersUrl) {
         RestClient restClient = buildAuthorizingClient();
 
-        var response = restClient.get()
-                .uri(organizationMembersUrl)
-                .retrieve()
-                .toEntity(GithubProfileJson[].class);
-        var pageLinks = response.getHeaders().get("link");
-        var body = response.getBody();
-        return new PaginatedResult<>(body, null);
-
-        /*
-        GithubProfileJson[] payload = restClient.get()
+        return restClient.get()
                 .uri(organizationMembersUrl)
                 .retrieve()
                 .body(GithubProfileJson[].class);
-        return new PaginatedResult<>(payload, null);
-
-         */
     }
 
     public GithubRepositoryJson[] getRepositories(String profileReposUrl) {
@@ -102,6 +90,7 @@ public class GetCodecentricDeveloperProfilesFromGithub implements ForGettingDeve
         return builder.build();
     }
 
+    /*
     public <T> PaginatedResult<T> getPaginatedResult(String url, Class<T> type) {
         RestClient restClient = buildAuthorizingClient();
 
@@ -111,6 +100,8 @@ public class GetCodecentricDeveloperProfilesFromGithub implements ForGettingDeve
                 .toEntity(type);
         var pageLinks = response.getHeaders().get("link");
         var body = response.getBody();
+
         return new PaginatedResult<>(body, null);
     }
+    */
 }
