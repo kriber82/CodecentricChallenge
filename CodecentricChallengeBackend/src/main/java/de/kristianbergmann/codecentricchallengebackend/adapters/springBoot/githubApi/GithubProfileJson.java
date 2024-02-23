@@ -1,4 +1,4 @@
-package de.kristianbergmann.codecentricchallengebackend.adapters.githubApi;
+package de.kristianbergmann.codecentricchallengebackend.adapters.springBoot.githubApi;
 
 public class GithubProfileJson {
     public String login;

@@ -1,7 +1,7 @@
 package de.kristianbergmann.codecentricchallengebackend;
 
 import de.kristianbergmann.codecentricchallengebackend.adapters.consoleUi.ShowDeveloperProficienciesInConsole;
-import de.kristianbergmann.codecentricchallengebackend.adapters.githubApi.GetCodecentricDeveloperProfilesFromGithub;
+import de.kristianbergmann.codecentricchallengebackend.adapters.springBoot.GetCodecentricDeveloperProfilesFromGithub;
 import de.kristianbergmann.codecentricchallengebackend.application.DisplayDeveloperLanguageProficiencyUseCase;
 
 public class CodecentricChallengeConsoleApplication {
