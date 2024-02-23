@@ -19,19 +19,10 @@ public class GetCodecentricDeveloperProfilesFromGithubTest {
 
     @Test
     public void queriesOrganizationMembersFromGithub() {
-        var answer = tested.getOrganizationMembers("https://api.github.com/orgs/codecentric/members");
-        var developers = answer.payload();
-        assertThat(developers.length).isEqualTo(30);
+        var developers = tested.getOrganizationMembers("https://api.github.com/orgs/codecentric/members");
+        assertThat(developers.length).withFailMessage("Probably only first page was retrieved").isGreaterThan(30);
         assertThat(developers).anyMatch(d -> d.login.equals("danielbayerlein") && d.repos_url.equals("https://api.github.com/users/danielbayerlein/repos"));
-    }
-
-    @Test
-    public void fillsPaginationInfo() throws URISyntaxException {
-        PaginatedResult<GithubProfileJson> answer = tested.getOrganizationMembers("https://api.github.com/orgs/codecentric/members");
-        assertThat(answer.paginationLinks().first()).isNull();
-        assertThat(answer.paginationLinks().previous()).isNull();
-        assertThat(answer.paginationLinks().next()).isEqualTo(new URI("https://api.github.com/organizations/1009716/members?page=2"));
-        assertThat(answer.paginationLinks().last()).isEqualTo(new URI("https://api.github.com/organizations/1009716/members?page=2"));
+        assertThat(developers).anyMatch(d -> d.login.equals("ufried"));
     }
 
     @Test
@@ -53,10 +44,17 @@ public class GetCodecentricDeveloperProfilesFromGithubTest {
     }
 
     @Test
+    public void returnsEmptyPaginationHeaderForAbsentHeader() {
+        var parsedHeaders = tested.parsePaginationHeader(null);
+        assertThat(parsedHeaders).isEqualTo(new PaginationLinks(null, null, null, null));
+    }
+
+    @Test
     public void queriesUserReposFromGithub() {
         var repositories = tested.getRepositories("https://api.github.com/users/denniseffing/repos");
-        assertThat(repositories.length).isEqualTo(30);
+        assertThat(repositories.length).withFailMessage("Probably only first page was retrieved").isGreaterThan(30);
         assertThat(repositories).anyMatch(r -> r.name.equals("istio-chaos-demo") && r.languages_url.equals("https://api.github.com/repos/denniseffing/istio-chaos-demo/languages"));
+        assertThat(repositories).anyMatch(r -> r.name.equals("titanium-server"));
     }
 
     @Test

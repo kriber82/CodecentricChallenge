@@ -1,75 +1,98 @@
 - danielbayerlein
     Java 1
-    CSS 7
+    CSS 10
     C 1
     Vue 1
-    HTML 10
+    HTML 12
     TypeScript 4
     Dockerfile 2
-    Shell 4
-    CoffeeScript 4
+    Shell 5
+    CoffeeScript 5
     Gherkin 1
-    JavaScript 16
+    JavaScript 25
     Objective-C 1
-    Ruby 8
+    Ruby 9
     Vim Script 1
     Python 2
 - danielkocot
     Nginx 1
-    Makefile 3
     XQuery 1
     Elm 1
-    Go 2
+    Go 5
     Mustache 1
-    HTML 5
-    Groovy 5
-    FreeMarker 1
-    TypeScript 2
-    Shell 6
-    JavaScript 5
-    Lua 1
-    Ruby 4
-    Apex 1
-    Python 4
+    HTML 31
+    NSIS 1
+    Groovy 17
+    SCSS 1
+    Less 1
+    SQLPL 2
+    Python 9
     Thrift 1
-    Java 6
-    CSS 6
-    Scala 2
-    Perl 1
-    XSLT 1
-    Dockerfile 2
-    CoffeeScript 1
-    Batchfile 2
-    Open Policy Agent 1
+    PowerShell 2
+    Smarty 2
+    Yacc 1
+    PLpgSQL 1
+    Perl 2
+    ApacheConf 1
+    Batchfile 8
+    Gherkin 2
+    GAP 1
     Tcl 1
+    Mako 1
     Arduino 1
-    Lex 1
     DTrace 1
+    C 1
+    Makefile 8
+    FreeMarker 6
+    TypeScript 4
+    Shell 31
+    R 1
+    Forth 1
+    JavaScript 27
+    Lua 4
+    PHP 1
+    VBScript 1
+    Ruby 9
+    Apex 1
+    Java 45
+    CSS 28
+    C++ 1
+    Scala 4
+    TeX 3
+    XSLT 5
+    Kotlin 1
+    Dockerfile 8
+    CoffeeScript 2
+    Open Policy Agent 1
+    Lex 3
 - danielschleindlsperger
     Java 1
-    CSS 10
+    CSS 13
     Scheme 1
     PLpgSQL 1
     Vue 2
-    HTML 14
-    TypeScript 6
-    Dockerfile 3
-    Shell 5
-    JavaScript 18
-    PHP 2
+    HTML 16
+    ApacheConf 1
+    TypeScript 10
+    Dockerfile 5
+    Shell 7
+    Batchfile 1
+    JavaScript 23
+    PHP 3
+    TSQL 1
     Clojure 10
     Python 1
     Emacs Lisp 1
 - denniseffing
     Scheme 1
-    CMake 1
+    CMake 2
     Elm 1
     Go 5
     Common Lisp 1
-    HTML 11
+    HTML 14
     NSIS 1
     Erlang 1
-    Groovy 3
+    Groovy 4
     ABAP 1
     Fortran 1
     SCSS 2
@@ -82,79 +105,83 @@
     PowerShell 1
     Rust 1
     PLpgSQL 2
-    Perl 1
+    Perl 2
+    Perl 6 1
     Xtend 1
     Batchfile 3
-    Gherkin 1
+    Gherkin 3
     PLSQL 1
     Swift 1
     Elixir 1
     Dart 1
     C# 3
-    C 3
+    C 4
     D 1
     Makefile 5
     QMake 1
-    TypeScript 7
-    Shell 11
+    FreeMarker 1
+    TypeScript 9
+    Shell 14
     R 1
     Smalltalk 1
-    JavaScript 10
+    JavaScript 13
     PHP 1
-    Lua 1
-    Ruby 2
+    Lua 2
+    Ruby 3
     Raku 1
-    Java 11
-    C++ 4
-    CSS 7
+    Java 15
+    C++ 5
+    CSS 9
     COBOL 1
     Scala 1
     NASL 1
     XSLT 2
-    Kotlin 2
-    Dockerfile 9
+    Kotlin 6
+    Dockerfile 10
     Ada 1
 - devshred
-    Java 16
-    CSS 4
+    Java 24
+    CSS 6
     XQuery 1
     Makefile 2
     Handlebars 1
-    PLpgSQL 1
-    Go 2
-    HTML 6
+    PLpgSQL 2
+    Vue 1
+    Go 3
+    HTML 9
     XSLT 1
     Perl 1
     Groovy 1
     Jupyter Notebook 1
     FreeMarker 2
-    Kotlin 7
-    TypeScript 1
-    Dockerfile 12
-    Shell 2
-    JavaScript 5
+    Kotlin 10
+    TypeScript 3
+    Dockerfile 16
+    Shell 10
+    JavaScript 6
     Swift 1
     Ruby 1
     Python 1
 - dickerpulli
     C 1
     Scheme 1
+    Procfile 1
     Makefile 1
-    HTML 11
+    HTML 12
     NSIS 1
     Jupyter Notebook 2
     Groovy 1
-    TypeScript 3
+    TypeScript 4
     Shell 11
     SCSS 1
-    JavaScript 12
+    JavaScript 13
     PHP 1
     Objective-C 1
     Ruby 1
     Python 4
     GLSL 1
-    Java 14
-    CSS 7
+    Java 20
+    CSS 8
     C++ 1
     TeX 2
     Perl 1
@@ -180,17 +207,25 @@
     Shell 1
     DataWeave 1
 - F43nd1r
-    TypeScript 4
-    Dockerfile 3
-    Java 12
-    Shell 8
-    CSS 6
-    Scala 1
-    TeX 1
-    JavaScript 4
-    HTML 8
+    C# 2
+    Java 32
+    CSS 9
+    C 1
+    Scala 2
+    TeX 3
+    Inno Setup 1
+    HTML 12
+    XSLT 1
     Groovy 4
-    Kotlin 14
+    Kotlin 23
+    EJS 1
+    TypeScript 8
+    Dockerfile 4
+    Shell 12
+    JavaScript 9
+    Puppet 1
+    Ruby 1
+    Clojure 1
 - goekhanm
     Dockerfile 1
     Java 2
@@ -204,54 +239,79 @@
     Ruby 1
     Python 1
 - JonasGroeger
-    Java 6
-    C++ 1
-    CSS 6
+    C# 1
     C 1
     CMake 1
     Makefile 4
-    TeX 1
-    Scala 1
-    Vue 2
     Go 1
-    HTML 8
-    ApacheConf 1
+    HTML 9
     FreeMarker 1
     MATLAB 1
     Stylus 1
-    Dockerfile 5
-    Shell 16
-    Starlark 1
-    JavaScript 9
-    Lua 1
-    PHP 1
-    Python 12
-- jonashackt
-    Nginx 1
-    Procfile 1
-    Makefile 1
-    XQuery 1
-    Go 2
-    Mustache 1
-    HTML 7
-    Groovy 1
-    Jupyter Notebook 1
-    FreeMarker 1
     TypeScript 2
-    Shell 6
-    SCSS 1
-    JavaScript 6
+    Shell 21
+    JavaScript 12
     Lua 1
-    Ruby 3
-    Python 1
-    Clojure 1
+    PHP 2
+    Apex 1
+    Ruby 1
+    Python 21
     PowerShell 2
-    Smarty 1
-    Java 8
-    CSS 5
-    XSLT 1
-    Dockerfile 3
+    Java 9
+    C++ 1
+    CSS 8
+    Rust 1
+    TeX 2
+    Scala 3
+    Vue 2
+    ApacheConf 1
+    Perl 1
+    Dockerfile 6
+    Starlark 1
     Batchfile 2
+    ActionScript 1
+- jonashackt
+    C# 1
+    Nginx 1
+    Procfile 3
+    C 4
+    CMake 3
+    Makefile 4
+    XQuery 1
+    Go 9
+    Mustache 2
+    HTML 22
+    Groovy 4
+    Jupyter Notebook 2
+    FreeMarker 2
+    TypeScript 11
+    Shell 31
+    Visual Basic 1
+    SCSS 2
+    JavaScript 18
+    Lua 1
+    Objective-C 3
+    PHP 4
+    Ruby 13
+    SQLPL 1
+    Python 14
+    Clojure 1
+    PowerShell 6
+    Smarty 3
+    Java 54
+    CSS 13
+    C++ 4
+    Jinja 3
+    Vue 5
+    XSLT 3
+    ApacheConf 1
+    Kotlin 4
+    HCL 3
+    Dockerfile 25
+    Batchfile 6
+    Swift 3
+    TSQL 1
+    Dart 3
 - ljouon
     TypeScript 1
     CSS 1
@@ -304,6 +364,7 @@
     Perl 1
     HCL 1
     Batchfile 2
+    Gherkin 1
     Meson 1
     C# 1
     C 1
@@ -312,13 +373,13 @@
     QMake 1
     DIGITAL Command Language 1
     Reason 1
-    TypeScript 3
+    TypeScript 4
     SmPL 1
     Shell 12
     R 1
     sed 1
     Awk 1
-    JavaScript 13
+    JavaScript 14
     PHP 2
     Lua 1
     Ruby 2
@@ -392,65 +453,104 @@
     JavaScript 3
     Python 4
 - PSanetra
-    C# 7
-    C 2
-    CMake 2
-    Makefile 6
-    M4 1
-    Go 7
-    Mustache 2
-    HTML 7
-    Groovy 1
-    Erlang 1
-    TypeScript 6
-    Shell 16
+    Scheme 1
+    CMake 4
+    Jasmin 1
+    M4 2
+    Go 17
+    Mustache 3
+    Common Lisp 1
+    HTML 23
+    Svelte 1
+    Groovy 4
+    Erlang 2
+    Boogie 1
+    VHDL 1
+    CUE 1
     LLVM 1
-    SCSS 2
-    JavaScript 12
-    PHP 2
-    Ruby 2
+    SCSS 3
+    Verilog 1
+    Haskell 1
+    Pascal 1
     SQLPL 1
-    Python 4
+    Assembly 1
+    Python 13
     Thrift 1
-    PowerShell 3
-    Smarty 3
-    Java 6
+    PowerShell 5
+    Smarty 6
     Yacc 1
-    C++ 2
-    CSS 5
-    Rust 1
+    Rust 2
+    PureScript 1
+    Objective-C++ 1
     PLpgSQL 1
-    Perl 1
+    Fluent 1
+    Perl 3
     Protocol Buffer 1
-    Dockerfile 11
-    Batchfile 4
+    Cuda 1
+    HCL 4
+    Batchfile 8
     ANTLR 1
+    AMPL 1
+    Meson 1
     PLSQL 1
-    Vim Script 1
-- reitzig
-    Java 7
-    CSS 4
-    C++ 1
-    C 1
+    Mako 1
+    C# 13
+    C 6
+    D 1
+    Makefile 18
+    FreeMarker 1
+    Reason 1
+    TypeScript 18
+    SmPL 1
+    Shell 39
+    R 1
+    sed 1
+    Awk 1
+    JavaScript 30
+    PHP 3
+    Objective-C 3
+    Lua 1
+    Ruby 4
+    Emacs Lisp 1
+    Java 16
+    C++ 5
+    CSS 15
     Scala 1
-    Makefile 5
-    TeX 2
-    Go 5
-    Sass 1
-    HTML 4
-    Groovy 2
-    Kotlin 3
-    Dockerfile 2
-    Shell 10
-    R 2
-    Batchfile 2
-    Gherkin 1
+    Vue 1
+    Elvish 1
+    Prolog 1
+    XSLT 2
+    Kotlin 2
+    Dockerfile 21
+    Nim 1
+    Roff 3
+    Nix 2
+    Vim Script 2
+- reitzig
+    C 1
+    Makefile 6
+    Go 8
+    HTML 9
+    Groovy 3
+    TypeScript 1
+    Shell 23
+    R 3
     SCSS 1
     JavaScript 7
-    PHP 1
-    Swift 1
-    Ruby 9
+    PHP 2
+    Ruby 14
     Python 2
+    Java 10
+    CSS 7
+    C++ 1
+    Scala 2
+    TeX 5
+    Sass 1
+    Kotlin 7
+    Dockerfile 7
+    Batchfile 2
+    Gherkin 5
+    Swift 1
     Crystal 1
 - renetalk
     Shell 1
@@ -458,25 +558,26 @@
     JavaScript 2
     HTML 1
 - rfalke
-    Java 16
+    Java 17
     Jinja 1
     CSS 2
-    C++ 1
+    C++ 2
     C 3
-    Makefile 5
+    Makefile 6
     Handlebars 1
     Go 1
     HTML 3
     Perl 1
     Erlang 1
     FreeMarker 1
+    Processing 1
     TypeScript 1
     Dockerfile 2
-    Shell 14
+    Shell 15
     R 1
-    Batchfile 3
+    Batchfile 4
     SCSS 1
-    JavaScript 4
+    JavaScript 5
     Ruby 2
     Python 9
 - robaca
@@ -548,16 +649,86 @@
     Ruby 1
     Clojure 1
 - s7nio
-    Java 14
-    CSS 8
+    Java 16
+    CSS 10
     TeX 1
     Scala 1
-    HTML 5
-    Perl 1
-    Shell 4
+    HTML 6
+    Perl 2
+    Perl 6 1
+    Shell 5
     CoffeeScript 1
     Batchfile 1
-    JavaScript 5
+    JavaScript 6
     PHP 2
     Ruby 2
     Python 2
+- ShirinG
+    Java 1
+    CSS 5
+    TeX 4
+    Makefile 1
+    HTML 12
+    Jupyter Notebook 4
+    PostScript 1
+    Dockerfile 5
+    R 9
+    Shell 3
+    SCSS 1
+    JavaScript 4
+    Ruby 1
+    Python 4
+- thackba
+    Java 6
+    CSS 1
+    Scala 3
+    Makefile 1
+    Go 1
+    Mustache 1
+    HTML 2
+    Kotlin 3
+    TypeScript 1
+    Dockerfile 1
+    Shell 2
+    JavaScript 3
+    Python 2
+- till1993
+    Shell 1
+    TeX 1
+    Kotlin 2
+    Python 1
+- tomscholz
+    C# 1
+    CMake 1
+    Makefile 13
+    Go 11
+    Mustache 1
+    HTML 34
+    Jupyter Notebook 2
+    Groovy 2
+    TypeScript 7
+    Shell 21
+    SCSS 1
+    JavaScript 46
+    PHP 5
+    Objective-C 1
+    Ruby 2
+    Cython 1
+    Python 7
+    PowerShell 1
+    Smarty 3
+    Java 2
+    CSS 34
+    Jinja 2
+    C++ 1
+    PLpgSQL 1
+    Vue 2
+    Kotlin 2
+    HCL 1
+    Dockerfile 11
+    Starlark 2
+    PLSQL 1
+    Swift 1
+    Mako 1
+    TSQL 4
+    VCL 1
