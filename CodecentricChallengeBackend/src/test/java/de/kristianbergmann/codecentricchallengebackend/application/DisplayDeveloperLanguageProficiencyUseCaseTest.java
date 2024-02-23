@@ -5,7 +5,7 @@ import de.kristianbergmann.codecentricchallengebackend.application.datamodel.Dev
 import de.kristianbergmann.codecentricchallengebackend.application.datamodel.ProgrammingLanguage;
 import de.kristianbergmann.codecentricchallengebackend.application.datamodel.SourceCodeRepository;
 import de.kristianbergmann.codecentricchallengebackend.application.viewmodel.DeveloperLanguageProficiencies;
-import de.kristianbergmann.codecentricchallengebackend.application.viewmodel.ShowDeveloperProficienciesDummy;
+import de.kristianbergmann.codecentricchallengebackend.application.viewmodel.ShowDeveloperProficienciesMock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +19,7 @@ public class DisplayDeveloperLanguageProficiencyUseCaseTest {
 
     private DisplayDeveloperLanguageProficiencyUseCase tested;
     private DeveloperProfilesInMemory forGettingDeveloperProfiles;
-    private ShowDeveloperProficienciesDummy forShowingDeveloperProfiles;
+    private ShowDeveloperProficienciesMock forShowingDeveloperProfiles;
 
     private final ProgrammingLanguage java = new ProgrammingLanguage("java");
     private final ProgrammingLanguage typescript = new ProgrammingLanguage("typescript");
@@ -34,7 +34,7 @@ public class DisplayDeveloperLanguageProficiencyUseCaseTest {
     @BeforeEach
     public void setup() {
         forGettingDeveloperProfiles = new DeveloperProfilesInMemory();
-        forShowingDeveloperProfiles = new ShowDeveloperProficienciesDummy();
+        forShowingDeveloperProfiles = new ShowDeveloperProficienciesMock();
         tested = new DisplayDeveloperLanguageProficiencyUseCase(forGettingDeveloperProfiles, forShowingDeveloperProfiles);
     }
 
