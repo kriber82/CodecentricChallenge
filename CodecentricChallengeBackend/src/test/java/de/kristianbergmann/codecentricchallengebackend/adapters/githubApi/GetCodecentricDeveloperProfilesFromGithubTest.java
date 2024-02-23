@@ -2,8 +2,10 @@ package de.kristianbergmann.codecentricchallengebackend.adapters.githubApi;
 
 import de.kristianbergmann.codecentricchallengebackend.application.datamodel.ProgrammingLanguage;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -17,29 +19,38 @@ public class GetCodecentricDeveloperProfilesFromGithubTest {
 
     @Test
     public void queriesOrganizationMembersFromGithub() {
-        var developers = tested.getOrganizationMembers("https://api.github.com/orgs/codecentric/members");
+        var answer = tested.getOrganizationMembers("https://api.github.com/orgs/codecentric/members");
+        var developers = answer.payload();
         assertThat(developers.length).isEqualTo(30);
         assertThat(developers).anyMatch(d -> d.login.equals("danielbayerlein") && d.repos_url.equals("https://api.github.com/users/danielbayerlein/repos"));
     }
 
-    /*
     @Test
-    @Disabled("later")
-    public void foo() {
+    public void fillsPaginationInfo() throws URISyntaxException {
         PaginatedResult<GithubProfileJson> answer = tested.getOrganizationMembers("https://api.github.com/orgs/codecentric/members");
-        assertThat(answer.nextPageUri()).isNotNull();
-
-        //tested.getOrganizationMembers(answer.nextPageUri);
-        //assertThat(developers.length).isEqualTo(30);
-        //assertThat(developers).anyMatch(d -> d.login.equals("danielbayerlein") && d.repos_url.equals("https://api.github.com/users/danielbayerlein/repos"));
+        assertThat(answer.paginationLinks().first()).isNull();
+        assertThat(answer.paginationLinks().previous()).isNull();
+        assertThat(answer.paginationLinks().next()).isEqualTo(new URI("https://api.github.com/organizations/1009716/members?page=2"));
+        assertThat(answer.paginationLinks().last()).isEqualTo(new URI("https://api.github.com/organizations/1009716/members?page=2"));
     }
 
     @Test
-    public void parsesPaginationHeaders() {
-        PaginatedResult<GithubProfileJson> answer = tested.getPaginatedResult("https://api.github.com/orgs/codecentric/members");
-        assertThat(answer.nextPageUri()).isNotNull();
+    public void parsesPaginationHeadersWithNextPage() throws URISyntaxException {
+        var parsedHeaders = tested.parsePaginationHeader("<https://api.github.com/organizations/1009716/members?page=2>; rel=\"next\", <https://api.github.com/organizations/1009716/members?page=2>; rel=\"last\"");
+        assertThat(parsedHeaders.first()).isNull();
+        assertThat(parsedHeaders.previous()).isNull();
+        assertThat(parsedHeaders.next()).isEqualTo(new URI("https://api.github.com/organizations/1009716/members?page=2"));
+        assertThat(parsedHeaders.last()).isEqualTo(new URI("https://api.github.com/organizations/1009716/members?page=2"));
     }
-    */
+
+    @Test
+    public void parsesPaginationHeadersWithPreviousPage() throws URISyntaxException {
+        var parsedHeaders = tested.parsePaginationHeader("<https://api.github.com/organizations/1009716/members?page=1>; rel=\"prev\", <https://api.github.com/organizations/1009716/members?page=1>; rel=\"first\"");
+        assertThat(parsedHeaders.first()).isEqualTo(new URI("https://api.github.com/organizations/1009716/members?page=1"));
+        assertThat(parsedHeaders.previous()).isEqualTo(new URI("https://api.github.com/organizations/1009716/members?page=1"));
+        assertThat(parsedHeaders.next()).isNull();
+        assertThat(parsedHeaders.last()).isNull();
+    }
 
     @Test
     public void queriesUserReposFromGithub() {

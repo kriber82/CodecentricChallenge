@@ -9,7 +9,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.web.client.RestClient;
 
+import java.net.URI;
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class GetCodecentricDeveloperProfilesFromGithub implements ForGettingDeveloperProfiles {
 
@@ -32,7 +34,7 @@ public class GetCodecentricDeveloperProfilesFromGithub implements ForGettingDeve
     @Override
     public List<Developer> getDevelopers() {
 
-        GithubProfileJson[] profiles = getOrganizationMembers("https://api.github.com/orgs/codecentric/members");
+        GithubProfileJson[] profiles = getOrganizationMembers("https://api.github.com/orgs/codecentric/members").payload();
         return Arrays.stream(profiles).
                 limit(maxChildRequests).
                 parallel().
@@ -54,13 +56,8 @@ public class GetCodecentricDeveloperProfilesFromGithub implements ForGettingDeve
         return new SourceCodeRepository(r.name, languages);
     }
 
-    public GithubProfileJson[] getOrganizationMembers(String organizationMembersUrl) {
-        RestClient restClient = buildAuthorizingClient();
-
-        return restClient.get()
-                .uri(organizationMembersUrl)
-                .retrieve()
-                .body(GithubProfileJson[].class);
+    public PaginatedResult<GithubProfileJson> getOrganizationMembers(String organizationMembersUrl) {
+        return getSinglePage(organizationMembersUrl, GithubProfileJson.class);
     }
 
     public GithubRepositoryJson[] getRepositories(String profileReposUrl) {
@@ -90,18 +87,37 @@ public class GetCodecentricDeveloperProfilesFromGithub implements ForGettingDeve
         return builder.build();
     }
 
-    /*
-    public <T> PaginatedResult<T> getPaginatedResult(String url, Class<T> type) {
+    public <T> PaginatedResult<T> getSinglePage(String url, Class<T> type) {
         RestClient restClient = buildAuthorizingClient();
 
         var response = restClient.get()
                 .uri(url)
                 .retrieve()
-                .toEntity(type);
-        var pageLinks = response.getHeaders().get("link");
+                .toEntity(type.arrayType());
+        var paginationLinks = parsePaginationHeader(response.getHeaders().getFirst("link"));
         var body = response.getBody();
-
-        return new PaginatedResult<>(body, null);
+        return new PaginatedResult<>((T[])body, paginationLinks);
     }
-    */
+
+    private static final Pattern paginationHeaderEntryPattern = Pattern.compile("<(?<uri>[^>]*)>; rel=\"(?<rel>[^\"]*)\"");
+    public PaginationLinks parsePaginationHeader(String linkHeader) {
+        URI first = null;
+        URI previous = null;
+        URI next = null;
+        URI last = null;
+        var paginationHeaderEntryMatcher = paginationHeaderEntryPattern.matcher(linkHeader);
+        boolean matchFound = paginationHeaderEntryMatcher.find();
+        while (matchFound) {
+            var uri = paginationHeaderEntryMatcher.group("uri");
+            var rel = paginationHeaderEntryMatcher.group("rel");
+            switch (rel) {
+                case "first": first = URI.create(uri); break;
+                case "prev": previous = URI.create(uri); break;
+                case "next": next = URI.create(uri); break;
+                case "last": last = URI.create(uri); break;
+            }
+            matchFound = paginationHeaderEntryMatcher.find();
+        }
+        return new PaginationLinks(first, previous, next, last);
+    }
 }
