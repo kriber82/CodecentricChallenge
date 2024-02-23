@@ -2,6 +2,7 @@ package de.kristianbergmann.codecentricchallengebackend.adapters.githubApi;
 
 import de.kristianbergmann.codecentricchallengebackend.application.datamodel.ProgrammingLanguage;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -16,9 +17,29 @@ public class GetCodecentricDeveloperProfilesFromGithubTest {
 
     @Test
     public void queriesOrganizationMembersFromGithub() {
-        var developers = tested.getOrganizationMembers("https://api.github.com/orgs/codecentric/members");
+        var answer = tested.getOrganizationMembers("https://api.github.com/orgs/codecentric/members");
+        var developers = answer.payload();
         assertThat(developers.length).isEqualTo(30);
         assertThat(developers).anyMatch(d -> d.login.equals("danielbayerlein") && d.repos_url.equals("https://api.github.com/users/danielbayerlein/repos"));
+    }
+
+    @Test
+    @Disabled("later")
+    public void foo() {
+        PaginatedResult<GithubProfileJson> answer = tested.getOrganizationMembers("https://api.github.com/orgs/codecentric/members");
+        assertThat(answer.nextPageUri()).isNotNull();
+        /*
+        tested.getOrganizationMembers(answer.nextPageUri);
+        assertThat(developers.length).isEqualTo(30);
+        assertThat(developers).anyMatch(d -> d.login.equals("danielbayerlein") && d.repos_url.equals("https://api.github.com/users/danielbayerlein/repos"));
+
+         */
+    }
+
+    @Test
+    public void parsesPaginationHeaders() {
+        PaginatedResult<GithubProfileJson> answer = tested.getPaginatedResult("https://api.github.com/orgs/codecentric/members");
+        assertThat(answer.nextPageUri()).isNotNull();
     }
 
     @Test

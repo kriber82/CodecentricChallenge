@@ -32,7 +32,7 @@ public class GetCodecentricDeveloperProfilesFromGithub implements ForGettingDeve
     @Override
     public List<Developer> getDevelopers() {
 
-        GithubProfileJson[] profiles = getOrganizationMembers("https://api.github.com/orgs/codecentric/members");
+        GithubProfileJson[] profiles = getOrganizationMembers("https://api.github.com/orgs/codecentric/members").payload();
         return Arrays.stream(profiles).
                 limit(maxChildRequests).
                 parallel().
@@ -54,13 +54,25 @@ public class GetCodecentricDeveloperProfilesFromGithub implements ForGettingDeve
         return new SourceCodeRepository(r.name, languages);
     }
 
-    public GithubProfileJson[] getOrganizationMembers(String organizationMembersUrl) {
+    public PaginatedResult<GithubProfileJson> getOrganizationMembers(String organizationMembersUrl) {
         RestClient restClient = buildAuthorizingClient();
 
-        return restClient.get()
+        var response = restClient.get()
+                .uri(organizationMembersUrl)
+                .retrieve()
+                .toEntity(GithubProfileJson[].class);
+        var pageLinks = response.getHeaders().get("link");
+        var body = response.getBody();
+        return new PaginatedResult<>(body, null);
+
+        /*
+        GithubProfileJson[] payload = restClient.get()
                 .uri(organizationMembersUrl)
                 .retrieve()
                 .body(GithubProfileJson[].class);
+        return new PaginatedResult<>(payload, null);
+
+         */
     }
 
     public GithubRepositoryJson[] getRepositories(String profileReposUrl) {
@@ -90,4 +102,15 @@ public class GetCodecentricDeveloperProfilesFromGithub implements ForGettingDeve
         return builder.build();
     }
 
+    public <T> PaginatedResult<T> getPaginatedResult(String url, Class<T> type) {
+        RestClient restClient = buildAuthorizingClient();
+
+        var response = restClient.get()
+                .uri(url)
+                .retrieve()
+                .toEntity(type);
+        var pageLinks = response.getHeaders().get("link");
+        var body = response.getBody();
+        return new PaginatedResult<>(body, null);
+    }
 }
