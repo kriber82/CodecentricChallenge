@@ -42,34 +42,35 @@ public class GithubApi {
     private <T> T getSingleObject(String url, ParameterizedTypeReference<T> objectType) {
         RestClient restClient = buildAuthorizingClient();
 
-        T response = restClient.get()
+        return restClient.get()
                 .uri(url)
                 .retrieve()
                 .body(objectType);
-        return response;
     }
 
-    private <T> PaginatedResult<T> getSinglePage(URI url, Class<T> type) {
+    private <T> PaginatedResult<T> getSinglePage(URI url, Class<T> elementType) {
         RestClient restClient = buildAuthorizingClient();
 
+        @SuppressWarnings("unchecked")
+        Class<T[]> bodyType = (Class<T[]>) elementType.arrayType();
         var response = restClient.get()
                 .uri(url)
                 .retrieve()
-                .toEntity(type.arrayType());
+                .toEntity(bodyType);
         var paginationLinks = PaginationLinks.parseFromLinkHeader(response.getHeaders().getFirst("link"));
         var body = response.getBody();
-        return new PaginatedResult<>((T[])body, paginationLinks);
+        return new PaginatedResult<>(body, paginationLinks);
     }
 
-    private <T> T[] getAllPages(String url, Class<T> type) {
+    private <T> T[] getAllPages(String url, Class<T> elementType) {
         Stream<T> resultStream = Stream.empty();
         var nextUrl = URI.create(url);
         while (nextUrl != null) {
-            var currentPage = getSinglePage(nextUrl, type);
+            var currentPage = getSinglePage(nextUrl, elementType);
             resultStream = Stream.concat(resultStream, Arrays.stream(currentPage.payload()));
             nextUrl = currentPage.paginationLinks().next();
         }
-        return resultStream.toArray(size -> (T[]) Array.newInstance(type.arrayType().componentType(), size));
+        return resultStream.toArray(size -> newArrayInstance(elementType, size));
     }
 
     private RestClient buildAuthorizingClient() {
@@ -77,6 +78,11 @@ public class GithubApi {
         if (githubBearerToken != null)
             builder.defaultHeader("Authorization", "Bearer " + githubBearerToken);
         return builder.build();
+    }
+
+    @SuppressWarnings("unchecked")
+    private <T> T[] newArrayInstance(Class<T> elementType, int size) {
+        return (T[])Array.newInstance(elementType, size);
     }
 
 }
